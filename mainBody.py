@@ -10,6 +10,8 @@ client = discord.Client()
 func_list = {
     '名言': f.random_meigen,
     '迷言': f.random_meigen,
+    '武器': f.random_splat_buki,
+    'ブキ': f.random_splat_buki,
     'help': f.help,
     'ヘルプ': f.help
 }

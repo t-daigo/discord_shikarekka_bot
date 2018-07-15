@@ -22,6 +22,14 @@ def parse_reply():
         line = f.readlines()
         return random.choice(line)
 
+def parse_buki_list():
+    '''
+    ブキ一覧からランダムに一つ返す
+    '''
+    with open('source/splatBuki.txt', 'r', encoding='utf-8') as f:
+        line = f.readlines()
+        return random.choice(line)
+
 
 async def random_meigen(client, message):
     '''
@@ -37,6 +45,12 @@ async def random_reply(client, message):
     s = '{} ' + parse_reply()
     await client.send_message(message.channel, s.format(message.author.mention))
 
+async def random_splat_buki(client, message):
+    '''
+    ランダムなブキ一つをメンションで送る
+    '''
+    s = '{} ' + parse_buki_list()
+    await client.send_message(message.channel, s.format(message.author.mention))
 
 async def help(client, message):
     '''
@@ -45,6 +59,7 @@ async def help(client, message):
     func_list = {
         '名言、 迷言': 'ランダムな迷言を表示します',
         'help、 ヘルプ': '機能一覧を表示します',
+        'ブキ、　武器': 'ランダムなブキを一つおすすめします',
         'それ以外': 'ランダムなリプライを返します'
     }
 

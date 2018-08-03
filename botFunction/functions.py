@@ -2,6 +2,7 @@ import random
 import discord
 import asyncio
 import csv
+import json
 
 
 def parse_meigen():
@@ -24,11 +25,13 @@ def parse_reply():
 
 def parse_buki_list():
     '''
-    ブキ一覧からランダムに一つ返す
+    ブキ一覧の辞書を返す
     '''
-    with open('source/splatBuki.txt', 'r', encoding='utf-8') as f:
-        line = f.readlines()
-        return random.choice(line)
+    with open('source/splatBuki.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+        # line = f.readlines()
+        # return random.choice(line)
 
 
 async def random_meigen(client, message):
@@ -49,7 +52,16 @@ async def random_splat_buki(client, message):
     '''
     ランダムなブキ一つをメンションで送る
     '''
-    s = '{} ' + parse_buki_list()
+    bukis = parse_buki_list()
+    comment = str(message.content)
+    for buki_type in bukis:
+        if buki_type in comment:
+            s = random.choice(bukis[buki_type])
+            break
+    else:
+        s = random.choice([random.choice(bukis[i]) for i in bukis])
+
+    s = '{} ' + s
     await client.send_message(message.channel, s.format(message.author.mention))
 
 async def help(client, message):

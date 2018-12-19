@@ -2,3 +2,5 @@ __pycache__
 *.pyc
 *.code-workspace
 .vscode
+.idea/*
+venv/*

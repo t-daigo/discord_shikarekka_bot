@@ -1,6 +1,4 @@
 import discord
-import asyncio
-import random
 import sys
 import os
 import botFunction.functions as f
@@ -19,9 +17,9 @@ func_list = {
 
 @client.event
 async def on_ready():
-    '''
+    """
     起動時に呼ばれるメソッド
-    '''
+    """
     print('-----Logged in info-----')
     print(client.user.name)
     print(client.user.id)
@@ -30,10 +28,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    '''
+    """
     特定のメッセージを受け取って処理する\n
     今はメンションを送るとランダムに名言を返す
-    '''
+    """
     try:
         if client.user.id in message.content:
             for k in func_list:
